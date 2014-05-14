@@ -25,6 +25,7 @@ gem 'pg'
 
 group :development, :test do
   gem 'rspec-rails'
+  gem 'shoulda-matchers'
   gem 'pry'
   gem 'pry-nav'
 end
