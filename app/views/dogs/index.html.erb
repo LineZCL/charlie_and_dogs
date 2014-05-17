@@ -1,0 +1,28 @@
+<h1>Listing dogs</h1>
+
+<%= form_tag dogs_path, :method => 'get' do %>
+  <p>
+    <%= text_field_tag :search_pedigree, params[:search_pedigree] %>
+    <%= submit_tag "Search", :name => nil %>
+  </p>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>name</th>
+      <th>age</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @dogs.each do |dog| %>
+      <tr>
+        <td><%= dog.name %></td>
+        <td><%= dog.age %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>
+

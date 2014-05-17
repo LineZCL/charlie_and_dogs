@@ -6,7 +6,7 @@ class CreateDogs < ActiveRecord::Migration
       t.string :photo
       t.text :description
       t.decimal :price, precision:8, scale:2
-      t.string :pedigree_id
+      t.integer :pedigree_id
 
       t.timestamps
     end

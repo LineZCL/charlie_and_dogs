@@ -24,10 +24,14 @@ gem 'jbuilder', '~> 1.2'
 gem 'pg'
 
 group :development, :test do
-  gem 'rspec-rails'
-  gem 'shoulda-matchers'
+  gem 'rspec-rails'  
   gem 'pry'
   gem 'pry-nav'
+end
+
+group :test do
+  gem 'factory_girl_rails'
+  gem 'shoulda-matchers'
 end
 
 group :doc do

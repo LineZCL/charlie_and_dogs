@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 20140514213829) do
     t.string   "photo"
     t.text     "description"
     t.decimal  "price",       precision: 8, scale: 2
-    t.string   "pedigree_id"
+    t.integer  "pedigree_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

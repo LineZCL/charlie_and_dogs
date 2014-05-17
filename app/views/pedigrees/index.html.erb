@@ -1,0 +1,26 @@
+<h1>Listing pedigrees</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Pedigree</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @pedigrees.each do |pedigree| %>
+      <tr>
+        <td><%= pedigree.name %></td>
+        <td><%= link_to 'Edit', edit_pedigree_path(pedigree) %></td>
+        <td><%= link_to 'Destroy', pedigree, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Pedigree', new_pedigree_path %>
