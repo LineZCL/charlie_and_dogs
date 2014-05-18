@@ -1,0 +1,27 @@
+<h3>Shopping Cart</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Pedigree</th>
+      <th>Quantity</th>
+      <th>Price</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @items.each do |item| %>
+      <tr>
+        <td><%= item.dog.name %></td>
+        <td><%= item.dog.pedigree.name %></td>
+        <td><%= item.quantity %></td>
+        <td><%= item.dog.price %></td>
+        <td><%= link_to 'Delete item', action: :delete_item_from_cart, item_id: item.id, sale_id: sale.id%></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<p><b>Valor Total</b> <%= sale.total_price %></p> 
+<td><%= link_to 'Check Out', action: checkout, sale_id: sale.id%></td>

@@ -5,6 +5,6 @@ FactoryGirl.define do
     photo 'http://stylonica.com/wp-content/uploads/2014/03/Cute-Dog-Wallpaper.jpg'
     description 'Banana is cute'
     price 200.00
-    association :pedigree, name: 'Golden'
+    association :pedigree
   end
 end

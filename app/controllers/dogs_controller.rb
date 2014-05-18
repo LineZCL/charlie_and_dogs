@@ -1,6 +1,25 @@
 class DogsController < ApplicationController
   before_action :set_dog, only: [:show, :edit, :update, :destroy]
 
+
+  def add_to_cart
+    dog = Dog.find(params[:new_item])
+    if params[:sale_id].nil?      
+      @sale = Sale.create(total_price: 0)
+    else
+      @sale = Sale.find(params[:sale_id])
+    end
+
+    @item_sale = ItemSale.find_by dog_id: dog.id
+    if(@item_sale.nil?)
+      @item_sale = ItemSale.create(dog_id: dog.id, sale_id: @sale.id, quantity: 1)
+    else
+      @item_sale.update_attributes(quantity: @item_sale.quantity + 1)
+    end
+    
+    redirect_to action: 'index', sale_id: @sale.id
+  end
+
   def index
     if params[:search_pedigree]      
       @dogs = Dog.find_by_pedigree(params[:search_pedigree])

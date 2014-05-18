@@ -1,7 +1,15 @@
 CharlieAndDogs::Application.routes.draw do
+  root 'dogs#index'
+
   resources :pedigrees
 
   resources :dogs
+
+  resources :sales
+
+  post '/add_to_cart' => 'dogs#add_to_cart'
+        
+  delete'/delete_item_from_cart' => 'sales#delete_item_from_cart'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

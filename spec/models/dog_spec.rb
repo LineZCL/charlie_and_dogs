@@ -3,6 +3,7 @@ require 'spec_helper'
 
 describe Dog do
   it { should belong_to(:pedigree) }
+  it { should have_many(:item_sales) }
 
   describe "#find_by_pedigree" do 
     context "with right name" do

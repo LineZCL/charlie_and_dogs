@@ -21,5 +21,19 @@ describe DogsController  do
       end
     end
   end
+  describe 'POST add_to_cart' do
+    it 'create sale' do
+      dog = FactoryGirl.create(:dog)
+      post :add_to_cart, {new_item: dog.id}, valid_session
+      expect(assigns(:sale)).not_to be_nil
+    end
+
+    it 'add item_sale' do
+      dog = FactoryGirl.create(:dog)
+      post :add_to_cart, {new_item: dog.id}, valid_session
+      expect(assigns(:item_sale)).not_to be_nil
+    end
+  end
+
   
 end

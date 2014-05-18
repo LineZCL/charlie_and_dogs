@@ -20,6 +20,7 @@
       <tr>
         <td><%= dog.name %></td>
         <td><%= dog.age %></td>
+        <td><%= link_to 'Add dog', action: :add_to_cart, new_item: dog.id, sale_id: params[:sale_id]%></td>
       </tr>
     <% end %>
   </tbody>
