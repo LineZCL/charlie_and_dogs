@@ -20,10 +20,13 @@
       <tr>
         <td><%= dog.name %></td>
         <td><%= dog.age %></td>
-        <td><%= link_to 'Add dog', action: :add_to_cart, new_item: dog.id, sale_id: params[:sale_id]%></td>
+        <td><%= link_to 'Add dog', add_to_cart_path(new_item: dog.id, sale_id: params[:sale_id]), method: :post %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+<% unless params[:sale_id].nil? %>
+  <%= link_to 'Dogs basket', action: 'show', controller: 'sales', id: params[:sale_id]%>
+<% end %>
 <br>
 

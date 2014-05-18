@@ -10,7 +10,7 @@ class DogsController < ApplicationController
       @sale = Sale.find(params[:sale_id])
     end
 
-    @item_sale = ItemSale.find_by dog_id: dog.id
+    @item_sale = ItemSale.where("dog_id = ? AND sale_id = ?", dog.id, @sale.id).take
     if(@item_sale.nil?)
       @item_sale = ItemSale.create(dog_id: dog.id, sale_id: @sale.id, quantity: 1)
     else

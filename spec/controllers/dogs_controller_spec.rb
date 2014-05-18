@@ -3,7 +3,7 @@ describe DogsController  do
 
   let(:valid_session) {{}}
 
-  describe 'GET index' do
+  describe 'GET #index' do
     context 'without search param' do
       it 'assigns all dogs' do
         dog = FactoryGirl.create(:dog)
@@ -21,7 +21,7 @@ describe DogsController  do
       end
     end
   end
-  describe 'POST add_to_cart' do
+  describe 'POST #add_to_cart' do
     it 'create sale' do
       dog = FactoryGirl.create(:dog)
       post :add_to_cart, {new_item: dog.id}, valid_session
@@ -34,6 +34,4 @@ describe DogsController  do
       expect(assigns(:item_sale)).not_to be_nil
     end
   end
-
-  
 end

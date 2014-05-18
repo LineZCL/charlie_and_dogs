@@ -18,10 +18,47 @@
         <td><%= item.dog.pedigree.name %></td>
         <td><%= item.quantity %></td>
         <td><%= item.dog.price %></td>
-        <td><%= link_to 'Delete item', action: :delete_item_from_cart, item_id: item.id, sale_id: sale.id%></td>
+        <td><%= link_to 'Delete item', delete_item_from_cart_path(item_id: item.id, sale_id: @sale.id), method: :post%></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-<p><b>Valor Total</b> <%= sale.total_price %></p> 
-<td><%= link_to 'Check Out', action: checkout, sale_id: sale.id%></td>
+<p><b>Valor Total</b> <%= @sale.total_price %></p> 
+<br/>
+
+<%= form_for @client, url: {action: "checkout"} do |client| %>
+  <% if @client.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@client.errors.count, "Errors") %>:</h2>
+
+      <ul>
+      <% @client.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= client.label :name %><br />
+    <%= client.text_field :name %>
+  </div>
+  <div class="field">
+    <%= client.label :email %><br />
+    <%= client.email_field :email %>
+  </div>
+  <div class="field">
+    <%= client.label :cpf %><br />
+    <%= client.text_field :cpf %>
+  </div>
+  <div class="field">
+    <%= client.label :address %><br />
+    <%= client.text_field :address %>
+  </div>
+  <%= hidden_field_tag(:sale_id, @sale.id) %>
+  <div class="actions">
+    <%= client.submit 'Checkout'%>
+  </div>
+<% end %>
+
+
