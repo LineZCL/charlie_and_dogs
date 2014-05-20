@@ -1,10 +1,9 @@
 class SalesController < ApplicationController
 
-  def show 
+  def show   
     @sale = Sale.find(params[:id])
     @items = ItemSale.where(sale_id: @sale.id)
     @client = Client.new
-
   end
 
   def delete_item_from_cart 
@@ -17,13 +16,13 @@ class SalesController < ApplicationController
   def checkout
      @client = Client.new(client_params)
 
-    if @client.save
-      sale = Sale.find(params[:sale_id])
-      sale.update_attributes(client_id: @client.id)
+    @sale = Sale.find(params[:sale_id])
+    @items = ItemSale.where(sale_id: @sale.id)
+    if @client.save      
+      @sale.update_attributes(client_id: @client.id)
       redirect_to action: 'index', controller: 'dogs', notice: 'Sale Succesful'
-      
     else
-       render action: 'show', id: params[:sale_id]
+      render action: 'show', id: params[:sale_id]
     end      
   end
 

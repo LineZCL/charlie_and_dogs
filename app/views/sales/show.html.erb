@@ -48,7 +48,7 @@
       <%= form_for @client, url: {action: "checkout"} do |client| %>
         <% if @client.errors.any? %>
           <div id="error_explanation">
-            <h2><%= pluralize(@client.errors.count, "Errors") %>:</h2>
+            <h2><%= pluralize(@client.errors.count, "Error") %>:</h2>
 
             <ul>
             <% @client.errors.full_messages.each do |msg| %>
