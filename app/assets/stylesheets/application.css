@@ -11,3 +11,8 @@
  *= require_self
  *= require_tree .
  */
+
+div#total_value
+{
+  text-align: right;
+}

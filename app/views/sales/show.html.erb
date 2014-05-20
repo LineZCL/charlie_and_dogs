@@ -1,64 +1,107 @@
-<h3>Shopping Cart</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Pedigree</th>
-      <th>Quantity</th>
-      <th>Price</th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @items.each do |item| %>
-      <tr>
-        <td><%= item.dog.name %></td>
-        <td><%= item.dog.pedigree.name %></td>
-        <td><%= item.quantity %></td>
-        <td><%= item.dog.price %></td>
-        <td><%= link_to 'Delete item', delete_item_from_cart_path(item_id: item.id, sale_id: @sale.id), method: :post%></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-<p><b>Valor Total</b> <%= @sale.total_price %></p> 
-<br/>
-
-<%= form_for @client, url: {action: "checkout"} do |client| %>
-  <% if @client.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@client.errors.count, "Errors") %>:</h2>
-
-      <ul>
-      <% @client.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+<div class="header">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2 col-md-2 col-sm-2">
+        <a href="#" title="Charlie & Dogs"><%= image_tag("logo.svg", alt: 'Charlie & Dogs') %></a>
+      </div>
+      <%= form_tag dogs_path, :method => 'get' do %>
+      <div class="col-lg-10 col-md-10 col-sm-10">
+        <div class="input-group buscar">
+          <h1 class="titulo-cachorro">Carrinho</h1>
+        </div>
+      </div>
+     <% end %> 
     </div>
-  <% end %>
+  </div>
+</div>
 
-  <div class="field">
-    <%= client.label :name %><br />
-    <%= client.text_field :name %>
-  </div>
-  <div class="field">
-    <%= client.label :email %><br />
-    <%= client.email_field :email %>
-  </div>
-  <div class="field">
-    <%= client.label :cpf %><br />
-    <%= client.text_field :cpf %>
-  </div>
-  <div class="field">
-    <%= client.label :address %><br />
-    <%= client.text_field :address %>
-  </div>
-  <%= hidden_field_tag(:sale_id, @sale.id) %>
-  <div class="actions">
-    <%= client.submit 'Checkout'%>
-  </div>
-<% end %>
+<div class="content">
+  <div class="container">
+    <div class="row">
+      <div class="panel panel-default">
+        <table class="table">
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>Raça</th>
+                <th>Quantidade</th>
+                <th>Preço</th>
+                <th></th>
+              </tr>
+            </thead>
+             <tbody>
+              <% @items.each do |item| %>
+                <tr>
+                  <td><%= item.dog.name %></td>
+                  <td><%= item.dog.pedigree.name %></td>
+                  <td><%= item.quantity %></td>
+                  <td><%= item.dog.price %></td>
+                  <td><%= link_to image_tag("delete_item.jpg", border: 0, size: "40x40"), delete_item_from_cart_path(item_id: item.id, sale_id: @sale.id), method: :post%></td>
+                </tr>
+              <% end %>
+            </tbody>
+         </table>
+         <div id="total_value" class="panel-footer"><b>Valor Total: </b> R$<%= @sale.total_price %></div>
+      </div>
+    </div>
+    <div class="row">
+      <%= form_for @client, url: {action: "checkout"} do |client| %>
+        <% if @client.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@client.errors.count, "Errors") %>:</h2>
 
+            <ul>
+            <% @client.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+            </ul>
+          </div>
+        <% end %>
+        <div class="col-lg-6">
+          <div class="input-group">
+            <span class="input-group-addon">
+              Nome
+            </span>
+            <%= client.text_field :name, class: 'form-control'%>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="input-group">
+            <span class="input-group-addon">
+              E-mail
+            </span>
+            <%= client.email_field :email, class: 'form-control'%>
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <br/>
+          <div class="input-group">
+            <span class="input-group-addon">
+              CPF
+            </span>
+            <%= client.text_field :cpf, class: 'form-control'%>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <br/>
+          <div class="input-group">
+            <span class="input-group-addon">
+              Endereço
+            </span>
+            <%= client.text_field :address, class: 'form-control'%>
+          </div>
+        </div>
+        <%= hidden_field_tag(:sale_id, @sale.id) %>
+        <div class="col-lg-6">
+          <br>
+        </div>
+        <div class="col-lg-6 " id="total_value">
+          <br/>
+          <%= client.submit 'Finalizar Compra', class: 'btn btn-primary'%>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
 

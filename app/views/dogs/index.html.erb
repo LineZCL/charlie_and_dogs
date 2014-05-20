@@ -1,32 +1,61 @@
-<h1>Listing dogs</h1>
-
-<%= form_tag dogs_path, :method => 'get' do %>
-  <p>
-    <%= text_field_tag :search_pedigree, params[:search_pedigree] %>
-    <%= submit_tag "Search", :name => nil %>
-  </p>
-<% end %>
-
-<table>
-  <thead>
-    <tr>
-      <th>name</th>
-      <th>age</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @dogs.each do |dog| %>
-      <tr>
-        <td><%= dog.name %></td>
-        <td><%= dog.age %></td>
-        <td><%= link_to 'Add dog', add_to_cart_path(new_item: dog.id, sale_id: params[:sale_id]), method: :post %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-<% unless params[:sale_id].nil? %>
-  <%= link_to 'Dogs basket', action: 'show', controller: 'sales', id: params[:sale_id]%>
-<% end %>
-<br>
-
+<div class="header">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2 col-md-2 col-sm-2">
+        <a href="#" title="Charlie & Dogs"><%= image_tag("logo.svg", alt: 'Charlie & Dogs') %></a>
+      </div>
+      <%= form_tag dogs_path, :method => 'get' do %>
+      <div class="col-lg-10 col-md-10 col-sm-10">
+        <div class="input-group buscar">
+          <%= text_field_tag :search_pedigree, params[:search_pedigree], class: 'form-control input-lg', 
+          placeholder: 'Buscar por...'%>
+          <span class="input-group-btn">
+            <button class="btn btn-default input-lg" type="button"><span class="glyphicon glyphicon-search"></span></button>
+          </span>
+        </div>
+      </div>
+     <% end %> 
+    </div>
+  </div>
+</div>
+<div class="content">
+  <div class="container">
+    <div class="row">
+      <% @dogs.each do |dog| %>
+        <%= link_to add_to_cart_path(new_item: dog.id, sale_id: params[:sale_id]), title: '',method: :post, class: "fancybox" do %>
+          <div class="col-md-3">
+            <div class="box-cachorro">
+              <img src='<%= dog.photo %>' alt='<%= dog.name %>'>
+              <div class="btn-foto">Leva eu!</div>
+               <div>
+                  <span class="titulo-cachorro"><%= dog.name %></span>
+                  <span class="detalhes-cachorro"><strong>R$ <%= dog.price %></strong><br><%= dog.age %> ano <br>
+                  <%= dog.description %></span>
+                </div>
+            </div>
+          </div>
+        <% end %> 
+      <% end %>
+    </div>
+  </div>
+</div>
+ <div class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-4">
+                <% if ! params[:sale_id].nil? %>
+                 <%= link_to image_tag("cart.png", border: 0), action: 'show', controller: 'sales', id: params[:sale_id] %>
+                <% end %>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4">
+                
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 text-right">
+                <%= image_tag("logo-rodape.png", alt: 'Charlie & Dogs') %>
+                <br>
+                <p class="telefone">11 0000.0000<br>
+                <a href="mailto:#" title="Entre em contato!">contato@charlieedog.com.br</a></p>
+            </div>
+        </div>
+    </div>
+</div>
