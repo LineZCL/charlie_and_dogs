@@ -10,7 +10,8 @@
           <%= text_field_tag :search_pedigree, params[:search_pedigree], class: 'form-control input-lg', 
           placeholder: 'Buscar por...'%>
           <span class="input-group-btn">
-            <button class="btn btn-default input-lg" type="button"><%= image_tag("search.png", size: "40x40")%></button>
+            <%= hidden_field_tag(:sale_id, params[:sale_id]) %>
+            <button class="btn btn-default input-lg" type="submit"><%= image_tag("search.png", size: "40x40")%></button>
         </div>
       </div>
      <% end %> 
@@ -22,7 +23,7 @@
     <div class="row">
       <% @dogs.each do |dog| %>
         <%= link_to add_to_cart_path(new_item: dog.id, sale_id: params[:sale_id]), title: '',method: :post, class: "fancybox" do %>
-          <div class="col-md-3">
+          <div class="col-md-3 container-box-cachorro">
             <div class="box-cachorro">
               <img src='<%= dog.photo %>' alt='<%= dog.name %>'>
               <div class="btn-foto">Leva eu!</div>

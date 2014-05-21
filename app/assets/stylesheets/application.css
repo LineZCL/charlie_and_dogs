@@ -16,3 +16,7 @@ div#total_value
 {
   text-align: right;
 }
+
+div.container-box-cachorro{
+  min-height: 350px;
+}
