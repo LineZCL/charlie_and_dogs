@@ -1,4 +1,6 @@
-#Charlie & Dogs [http://charlie-and-dogs.herokuapp.com/]
+#Charlie & Dogs 
+
+[Link aplicativo - Heroku](http://charlie-and-dogs.herokuapp.com/)
 
 ##Descrição
 O projeto é fruto de um teste para a [Ornitorrinko](http://ornitorrinko.com/)
