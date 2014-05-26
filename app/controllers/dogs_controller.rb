@@ -4,7 +4,7 @@ class DogsController < ApplicationController
 
   def add_to_cart
     dog = Dog.find(params[:new_item])
-    if params[:sale_id].nil?      
+    if params[:sale_id].nil? || params[:sale_id] == ""    
       @sale = Sale.create(total_price: 0)
     else
       @sale = Sale.find(params[:sale_id])
